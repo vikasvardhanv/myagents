@@ -4,9 +4,12 @@ services:
     runtime: docker
     plan: free
     healthCheckPath: /health
+    dockerCommand: node dist/index.js gateway --allow-unconfigured --port 8080 --bind lan
     envVars:
       - key: PORT
         value: "8080"
+      - key: NODE_OPTIONS
+        value: "--max-old-space-size=384"
       - key: SETUP_PASSWORD
         sync: false
       - key: OPENCLAW_STATE_DIR
@@ -15,3 +18,4 @@ services:
         value: /tmp/workspace
       - key: OPENCLAW_GATEWAY_TOKEN
         generateValue: true
+
